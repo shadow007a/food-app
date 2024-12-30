@@ -1,5 +1,10 @@
+import styles from "./CSS/Nav.module.css";
 const Nav = () => {
-  return <h1>🍔 Food App</h1>;
+  return (
+    <nav className={styles.nav}>
+      <h1>🍔 Food App</h1>
+    </nav>
+  );
 };
 
 export default Nav;

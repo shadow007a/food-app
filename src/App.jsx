@@ -1,6 +1,7 @@
 import FoodList from "./Components/FoodList";
 import Search from "./Components/Search";
 import React, { useState } from "react";
+import Nav from "./Components/Nav";
 import "./App.css";
 function App() {
   const [foodData, setFoodData] = useState([
@@ -67,7 +68,6 @@ function App() {
   ]);
   return (
     <div className="App">
-      <h1>Food App</h1>
       <Nav />
       <Search foodData={foodData} setFoodData={setFoodData} />
       <FoodList foodData={foodData} />
