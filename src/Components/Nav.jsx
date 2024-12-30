@@ -1,4 +1,4 @@
-import styles from "./CSS/Nav.module.css";
+import styles from "./styles/Nav.module.css";
 const Nav = () => {
   return (
     <nav className={styles.nav}>

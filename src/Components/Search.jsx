@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from "react";
-import styles from "./CSS/Search.module.css";
-const Search = ({ foodData, setFoodData }) => {
+import styles from "./styles/Search.module.css";
+
+const Search = ({ setFoodData }) => {
   const [query, setQuery] = useState("Pizza");
+  const [searchTrigger, setSearchTrigger] = useState(false); // State to trigger useEffect
   const URL = "https://api.spoonacular.com/recipes/complexSearch";
   const API = "bf4f205f1159426f8137d375317396a9";
+
   useEffect(() => {
+    if (!searchTrigger) return; // Prevent fetch on initial render
     const getData = async () => {
       const res = await fetch(`${URL}?query=${query}&apiKey=${API}`);
       const data = await res.json();
-      console.log(data.results);
       setFoodData(data.results);
     };
-  }, [query]);
+    getData();
+    setSearchTrigger(false); // Reset the trigger after fetching data
+  }, [searchTrigger]);
+
+  const handleSearch = () => {
+    setSearchTrigger(true); // Trigger useEffect
+  };
+
   return (
     <div className={styles.searchContainer}>
       <input
@@ -20,6 +30,7 @@ const Search = ({ foodData, setFoodData }) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
+      <button onClick={handleSearch}>🔍</button>
     </div>
   );
 };
